@@ -20,4 +20,10 @@ describe('https factory', () => {
 
     expect(HttpsFactory).toThrow();
   });
+
+  describe('get', () => {
+    it('should return promise with data on success', done => {
+      done();
+    });
+  });
 });
