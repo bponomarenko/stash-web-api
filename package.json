@@ -1,0 +1,30 @@
+{
+  "name": "stash-web-api",
+  "version": "0.1.0",
+  "description": "Provides access to some of the Stash's API which is not available with official REST API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bponomarenko/stash-web-api.git"
+  },
+  "keywords": [
+    "stash",
+    "web",
+    "api"
+  ],
+  "author": "Borys Ponomarenko <bponomarenko@gmail.com>",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/bponomarenko/stash-web-api/issues"
+  },
+  "homepage": "https://github.com/bponomarenko/stash-web-api#readme",
+  "dependencies": {
+    "promise": "^7.1.1"
+  },
+  "engines": {
+    "node" : ">=4.2.4"
+  }
+}
