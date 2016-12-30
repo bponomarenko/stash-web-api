@@ -4,7 +4,7 @@
   "description": "Provides access to some of the Stash's API which is not available with official REST API",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/jasmine"
   },
   "repository": {
     "type": "git",
@@ -25,6 +25,11 @@
     "promise": "^7.1.1"
   },
   "engines": {
-    "node" : ">=4.2.4"
+    "node": ">=4.2.4"
+  },
+  "devDependencies": {
+    "jasmine": "^2.5.2",
+    "jasmine-expect": "^3.0.1",
+    "mock-require": "^2.0.0"
   }
 }
