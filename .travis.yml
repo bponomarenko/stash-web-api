@@ -6,7 +6,7 @@ node_js:
 - 4
 
 script:
-- npm test
+- npm cover
 
 deploy:
   skip_cleanup: true

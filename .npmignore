@@ -4,4 +4,5 @@
 .travis.yml
 node_modules
 spec
+coverage
 index.js

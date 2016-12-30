@@ -4,7 +4,8 @@
   "description": "Provides access to some of the Stash's API which is not available with official REST API",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/jasmine"
+    "test": "./node_modules/.bin/istanbul cover node_modules/jasmine/bin/jasmine.js",
+    "cover": "npm test && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,8 @@
     "node": ">=4.2.4"
   },
   "devDependencies": {
+    "coveralls": "^2.11.15",
+    "istanbul": "^0.4.5",
     "jasmine": "^2.5.2",
     "jasmine-expect": "^3.0.1",
     "mock-require": "^2.0.0"
