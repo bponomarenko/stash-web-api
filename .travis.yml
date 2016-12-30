@@ -1,12 +1,10 @@
 language: node_js
 
 node_js:
-- 6
-- 5
 - 4
 
 script:
-- npm cover
+- npm run cover
 
 deploy:
   skip_cleanup: true
@@ -16,4 +14,3 @@ deploy:
     secure: UI23R04x+gXwzB1BCN4HZgWrAwKn+s0Fn47NymC6eRmKhCBWx6WWKbyGfy555WY/8R8X95oYVemKi/buAyWzeOxyp+XXRi3puxlFyx/ONfeP+vOSnt0zEUWaiuVVVm7+VRQH4iOcyimJv80hgiBbTI/RcxVZHf1Y0eAghsEERMaY32l9eGY5kctxjE7YATTRGqD1LHVd2vWlwklVIk9itQu+rfXlsVnbsMq0nCmbiS3rBgOJRMXfko2zXpKknSXeBKx7+sb8Ou2Hja3fqFT5pzH/Hole74rMhFqLze7hlrUz4v47TYgfT1Q2p9kpiVBN5vuvVsV6Ml++HqAbk/J59nnsl6saZvklBD/VnI4SpYAEWifHu+likHHAA2IUbR5pn7kUBqAJ3Yq33oI8zeGzYxLi2YroO5ZSIu1UejrMJ7/1iB2ySJSftVbEFiXNm6gESzbdg2d9fiNlXXvt2be4y9JTFG3pvCqZF0qn8846iL9QxZQ9cxVkQq0sINBe9cDNDDKMv2y0D8J8TEeLLL5mRtnpaFzpUSTcGf919bQkdw2/OTuxwos2ETQcAF7SxFt2oJP71ZebR+Xew8qJ/f6E0www4LEXlHKV8lwvf8ZfG2orsk84SptUkb89W6cS+m+fUB7qRj9r9yO7TzYQux20T/oXT8SlJIXGjMjwNqPE7jc=
   on:
     branch: master
-    node: 4
