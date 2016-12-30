@@ -25,5 +25,9 @@ describe('https factory', () => {
     it('should return promise with data on success', done => {
       done();
     });
+
+    it('should return promise with data on success', done => {
+      done();
+    });
   });
 });
