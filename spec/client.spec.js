@@ -28,6 +28,7 @@ describe('Client', () => {
     expect(() => new Client({ baseUrl: null, username: null, password: null })).toThrow();
     expect(() => new Client({ baseUrl: '123' })).toThrow();
     expect(() => new Client({ username: '123', password: '123' })).toThrow();
+    expect(() => new Client({ username: '123', baseUrl: '123' })).toThrow();
     expect(() => new Client({ username: '123', password: '123', baseUrl: '123' })).not.toThrow();
   });
 });
