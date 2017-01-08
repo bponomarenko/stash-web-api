@@ -9,7 +9,7 @@ Tested with Atlassian Stash v3.5.1
 
 ## Usage
 
-```
+```javascript
 var Client = require('stash-web-api').Client;
 
 var stashApi = new Client({
@@ -24,7 +24,8 @@ var stashApi = new Client({
 ### Repository branch permissions
 
 Get all branch permissions for a repository:
-```
+
+```javascript
 stashApi.branchPermissions.get(projectKey, repositorySlug); // Returns Promise
 ```
 
