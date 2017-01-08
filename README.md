@@ -7,7 +7,7 @@ Provides access to some of the Stash's API which is not available with official 
 
 Tested with Atlassian Stash v3.5.1
 
-## Initialising client
+## Usage
 
 ```
 var Client = require('stash-web-api').Client;
