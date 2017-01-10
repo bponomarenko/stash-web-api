@@ -17,8 +17,9 @@ describe('Client', () => {
     const client = new Client(options);
     const apiKeys = Object.keys(client);
 
-    expect(apiKeys.length).toEqual(1);
+    expect(apiKeys.length).toEqual(2);
     expect(client['branchPermissions']).toBeObject();
+    expect(client['branchingModel']).toBeObject();
   });
 
   it('should have validation for options', () => {

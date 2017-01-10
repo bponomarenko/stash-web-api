@@ -2,7 +2,7 @@
 
 const HttpsFactory = require('../lib/https');
 
-describe('https factory', () => {
+describe('https factory:', () => {
   it('should be a function, which returns object', () => {
     expect(HttpsFactory).toBeFunction();
 
