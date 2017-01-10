@@ -12,11 +12,15 @@
     "url": "git+https://github.com/bponomarenko/stash-web-api.git"
   },
   "keywords": [
+    "atlassian",
     "stash",
     "web",
     "api"
   ],
-  "author": "Borys Ponomarenko <bponomarenko@gmail.com>",
+  "author": {
+    "name": "Borys Ponomarenko",
+    "email": "bponomarenko@gmail.com"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/bponomarenko/stash-web-api/issues"
