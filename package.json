@@ -1,6 +1,6 @@
 {
   "name": "stash-web-api",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Provides access to some of the Stash's API which is not available with official REST API",
   "main": "index.js",
   "scripts": {
