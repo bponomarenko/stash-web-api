@@ -16,10 +16,10 @@ describe('Branch Permissions:', () => {
 
   it('should have limited set of methods', () => {
     const api = apiFactory(https);
-    expect(Object.keys(api).length).toEqual(3);
+    expect(Object.keys(api).length).toEqual(4);
   });
 
-  describe('Get method', () => {
+  describe('GetAll method', () => {
     let api;
 
     beforeEach(() => {
@@ -29,7 +29,7 @@ describe('Branch Permissions:', () => {
     it('should make two calls and return successful promise on success', done => {
       https.get.and.returnValue(Promise.resolve({ values: [] }));
 
-      api.get('projectKey', 'repositoryKey')
+      api.getAll('projectKey', 'repositoryKey')
         .catch(done.fail)
         .then(res => {
           expect(res).toBeEmptyArray();
@@ -42,7 +42,7 @@ describe('Branch Permissions:', () => {
     it('should return failed promise on failure', done => {
       https.get.and.callFake(url => url.includes('permitted') ? Promise.reject('fake error') : Promise.resolve({ values: [] }));
 
-      api.get('projectKey', 'repositoryKey')
+      api.getAll('projectKey', 'repositoryKey')
         .then(done.fail)
         .catch(error => {
           expect(error).toEqual('fake error');
@@ -70,7 +70,7 @@ describe('Branch Permissions:', () => {
 
       https.get.and.callFake(url => Promise.resolve(url.includes('permitted') ? permittedData : restrictedData));
 
-      api.get('projectKey', 'repositoryKey')
+      api.getAll('projectKey', 'repositoryKey')
         .catch(done.fail)
         .then(res => {
           expect(res).toEqual([
@@ -90,7 +90,7 @@ describe('Branch Permissions:', () => {
         ]
       }));
 
-      api.get()
+      api.getAll()
         .then(done.fail)
         .catch(err => {
           expect(err).toEqual(['Error message', 'More errors']);
@@ -127,7 +127,7 @@ describe('Branch Permissions:', () => {
       api.add('test', 'test')
         .then(done.fail)
         .catch(err => {
-          expect(err).toEqual('Permission object should be defined');
+          expect(err).toEqual('Permission data should be defined');
           expect(https.post).not.toHaveBeenCalled();
         })
         .then(done);
@@ -182,6 +182,109 @@ describe('Branch Permissions:', () => {
       }));
 
       api.add('test', 'test', {})
+        .then(done.fail)
+        .catch(err => {
+          expect(err).toEqual(['Error message', 'More errors']);
+        })
+        .then(done);
+    });
+  });
+
+  describe('Update method', () => {
+    let api;
+
+    beforeEach(() => {
+      api = apiFactory(https);
+    });
+
+    it('should make POST call with correct params and return resolved Promise on success', done => {
+      https.put.and.returnValue(Promise.resolve('successful response'));
+
+      api.update('test', 'test', 123, {})
+        .catch(done.fail)
+        .then(res => {
+          expect(res).toEqual('successful response');
+          expect(https.put).toHaveBeenCalledWith(
+            '/rest/branch-permissions/latest/projects/test/repos/test/restricted/123',
+            jasmine.any(Object)
+          );
+        })
+        .then(done);
+    });
+
+    it('should check for permission id and fail if not it`s not present', done => {
+      https.put.and.returnValue(Promise.resolve('successful response'));
+
+      api.update('test', 'test')
+        .then(done.fail)
+        .catch(err => {
+          expect(err).toEqual('Permission ID should be defined');
+          expect(https.put).not.toHaveBeenCalled();
+        })
+        .then(done);
+    });
+
+    it('should check for permission data and fail if not it`s not present', done => {
+      https.put.and.returnValue(Promise.resolve('successful response'));
+
+      api.update('test', 'test', 123)
+        .then(done.fail)
+        .catch(err => {
+          expect(err).toEqual('Permission data should be defined');
+          expect(https.put).not.toHaveBeenCalled();
+        })
+        .then(done);
+    });
+
+    it('should transform branch permission object to correct request data object', done => {
+      https.put.and.returnValue(Promise.resolve());
+
+      api.update('test', 'test', 1234, {
+        branch: 'stash branch'
+      })
+        .catch(done.fail)
+        .then(res => {
+          // Check second argument only, which is put data object
+          expect(https.put.calls.argsFor(0)[1]).toEqual({
+            type: 'BRANCH',
+            value: 'refs/heads/stash branch',
+            users: [],
+            groups: []
+          });
+        })
+        .then(done);
+    });
+
+    it('should transform pattern permission object to correct request data object', done => {
+      https.put.and.returnValue(Promise.resolve());
+
+      api.update('test', 'test', 552, {
+        pattern: 'pattern*with^wildcards',
+        users: 'borys',
+        groups: ['developers', 'admins']
+      })
+        .catch(done.fail)
+        .then(res => {
+          // Check second argument only, which is put data object
+          expect(https.put.calls.argsFor(0)[1]).toEqual({
+            type: 'PATTERN',
+            value: 'pattern*with^wildcards',
+            users: ['borys'],
+            groups: ['developers', 'admins']
+          });
+        })
+        .then(done);
+    });
+
+    it('should return array of error messages for well formed error objects', done => {
+      https.put.and.returnValue(Promise.reject({
+        errors: [
+          { message: 'Error message' },
+          { message: 'More errors' }
+        ]
+      }));
+
+      api.update('test', 'test', 4234, {})
         .then(done.fail)
         .catch(err => {
           expect(err).toEqual(['Error message', 'More errors']);
