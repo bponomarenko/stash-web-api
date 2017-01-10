@@ -20,7 +20,7 @@ describe('Branch Permissions', () => {
       api = apiFactory(https);
     });
 
-    it('should make two calls and return successful promise', done => {
+    it('should make two calls and return successful promise on success', done => {
       https.get.and.returnValue(Promise.resolve({ values: [] }));
 
       api.get('projectKey', 'repositoryKey')
@@ -33,7 +33,7 @@ describe('Branch Permissions', () => {
         .then(done);
     });
 
-    it('should return failed promise', done => {
+    it('should return failed promise on failure', done => {
       https.get.and.callFake(url => url.includes('permitted') ? Promise.reject('fake error') : Promise.resolve({ values: [] }));
 
       api.get('projectKey', 'repositoryKey')
@@ -44,11 +44,13 @@ describe('Branch Permissions', () => {
         .then(done);
     });
 
-    it('should return successful promise', done => {
+    it('should return successful promise with merged arrays', done => {
       const permittedData = {
         values: [
           { restrictedId: 1, user: 'someuser' },
+          { restrictedId: 1, user: 'another user' },
           { restrictedId: 2, group: 'somegroup' },
+          { restrictedId: 2, user: 'yet another user' },
           { restrictedId: 3, data: 'fakedata' }
         ]
       };
@@ -66,8 +68,8 @@ describe('Branch Permissions', () => {
         .catch(done.fail)
         .then(res => {
           expect(res).toEqual([
-            { id: 1, index: 'one', user: 'someuser' },
-            { id: 2, index: 'two', group: 'somegroup' },
+            { id: 1, index: 'one', users: ['someuser', 'another user'] },
+            { id: 2, index: 'two', users: ['yet another user'], groups: ['somegroup'] },
             { id: 3, index: 'three' }
           ]);
         })
