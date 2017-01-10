@@ -1,6 +1,6 @@
 {
   "name": "stash-web-api",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Provides access to some of the Stash's API which is not available with official REST API",
   "main": "index.js",
   "scripts": {
@@ -17,7 +17,7 @@
     "api"
   ],
   "author": "Borys Ponomarenko <bponomarenko@gmail.com>",
-  "license": "SEE LICENSE IN LICENSE",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/bponomarenko/stash-web-api/issues"
   },
