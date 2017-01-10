@@ -28,7 +28,8 @@ var stashApi = new Client({
 Get all branch permissions for a repository:
 
 ```javascript
-stashApi.branchPermissions.getAll(projectKey, repositorySlug); // Returns Promise
+// Returns Promise resolved to an Array of repository branch permissions on success
+stashApi.branchPermissions.getAll(projectKey, repositorySlug); 
 ```
 
 ##### #add
@@ -42,7 +43,8 @@ var permission = {
   groups: ['development', 'admins']  
 };
 
-stashApi.branchPermissions.add(projectKey, repositorySlug, permission); // Returns Promise
+// Returns Promise resolved to the new permission's object on success
+stashApi.branchPermissions.add(projectKey, repositorySlug, permission);
 ```
 
 Permission object should be defined and should contain:
@@ -62,7 +64,8 @@ var permission = {
   groups: ['development', 'admins']  
 };
 
-stashApi.branchPermissions.update(projectKey, repositorySlug, permissionId, permission); // Returns Promise
+// Returns Promise resolved to the updated permission's object
+stashApi.branchPermissions.update(projectKey, repositorySlug, permissionId, permission);
 ```
 
 Permission object should be defined and should contain:
@@ -78,7 +81,37 @@ _Note that permission type (replace __branch__  property with __pattern__, and v
 Delete existing branch permision on a repository:
 
 ```javascript
-stashApi.branchPermissions.remove(projectKey, repositorySlug, permissionId); // Returns Promise
+// Returns Promise resolved to undefined on success
+stashApi.branchPermissions.remove(projectKey, repositorySlug, permissionId);
+```
+
+### Repository branching model
+
+##### #get
+
+Get current branching model for a repository:
+
+```javascript
+// Returns Promise resolved to the current branching model on success, or rejected with an error if branching model is disabled
+stashApi.branchingModel.get(projectKey, repositorySlug);
+```
+
+##### #enable
+
+Enable branching model for a repository:
+
+```javascript
+// Returns Promise resolved to the branching model on success
+stashApi.branchingModel.enable(projectKey, repositorySlug);
+```
+
+##### #disable
+
+Disable branching model for a repository:
+
+```javascript
+// Returns Promise resolved to an undefined on success
+stashApi.branchingModel.disable(projectKey, repositorySlug);
 ```
 
 ## License
